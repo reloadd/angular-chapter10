@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { PasswordValidator } from './passwordValidator';
 import { LoginService } from './login.service';
 
@@ -12,7 +12,7 @@ export class LoginComponent  {
 
     form: FormGroup;        
 
-    constructor(fb: FormBuilder, private _loginService: LoginService){        
+    constructor(fb: FormBuilder, private _loginService: LoginService,private _router:Router){        
 
         this.form = fb.group({
             username:['',Validators.required ],
@@ -27,6 +27,9 @@ export class LoginComponent  {
             this.form.controls['password'].setErrors({
                 invalidLogin: true 
             });
-        }        
+        }   
+        
+        //if success then it should be redirected to homepage
+        this._router.navigate(["/"]);
     }
 }
